@@ -12,11 +12,9 @@ public:
             prefixgcd.push_back(pref);
         }
         sort(prefixgcd.begin(),prefixgcd.end());
-        int l=0;
-        int r=n-1;
         long long totalsum=0;
-        while(l<r){
-            totalsum+=gcd(prefixgcd[l], prefixgcd[r]); ++l;--r;
+        for(int l=0,r=n-1;l<r;++l,--r){
+            totalsum+=gcd(prefixgcd[l],prefixgcd[r]);
         }
         return totalsum;
     }
