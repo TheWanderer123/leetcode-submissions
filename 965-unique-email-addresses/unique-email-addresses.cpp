@@ -1,22 +1,20 @@
 class Solution {
 public:
     int numUniqueEmails(vector<string>& emails) {
-        unordered_set<string> unique;
-        for(const string& str:emails){
-            if(str.length()<=4 || str.substr(str.length()-4)!=".com" || str[0]=='+') continue;
-            size_t posat=str.find('@');
-            string loc=str.substr(0,posat);
+        unordered_set<string> cleans;
+        for (const string& s: emails){
+            size_t posat=s.find('@');
+            string loc=s.substr(0,posat);
             string clean="";
             for (const char& c:loc){
                 if(c=='+') break;
-                if(c!='.') clean+=c;
+                else if(c=='.') continue;
+                else clean+=c;
             }
-            if(clean.size()==0) continue;
-            string dom=str.substr(posat);
-            if (dom.size()<6) continue;
+            string dom=s.substr(posat);
             clean+=dom;
-            unique.insert(clean);
+            cleans.insert(clean);
         }
-        return unique.size();
+        return cleans.size();
     }
 };
